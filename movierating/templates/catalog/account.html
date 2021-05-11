@@ -1,0 +1,62 @@
+{% extends 'template.html' %}
+{% load static %}
+{% block content %}
+    <div class="container" style="margin-top: 100px">
+        <hr style="margin-bottom: 50px">
+        <div class="row">
+            <div class="col" style="text-align: center">
+                <b>Юзернейм: {{ account.username }}</b>
+            </div>
+            <div class="col" style="text-align: center">
+                <div class="row">
+                    <b>Статус аккаунта:
+                    {% if profile.account_status == "ENABLED" %}
+                        ✔ (Активен)
+                    {% else %}
+                        ✘ (Заблокирован)
+                    {% endif %}</b>
+                </div>
+                <br>
+                <div class="row">
+                    E-Mail:
+                    {% if profile.email %}
+                        {{ profile.email }}
+                    {% else %}
+                        Информация скрыта
+                    {% endif %}
+                </div>
+                <div class="row">
+                    Полное имя:
+                    {% if account.name or account.last_name %}
+                        {{ account.name }} {{ account.last_name }}
+                    {% else %}
+                        Информация скрыта
+                    {% endif %}
+                </div>
+                <br>
+                <div class="row">
+                    Клиентский IP:
+                    {{ client_ip }}
+                </div>
+                <div class="row">
+                    Локальное время:
+                    {{ local_time }}
+                </div>
+                <div class="row">
+                    Местонахождение:
+                    {{ location }}
+                </div>
+                <div class="row" style="margin-top: 25px">
+                    <button type="button" class="btn btn-primary" onclick='location.href="{% url 'edit' %}";'>Изменить</button>
+                </div>
+                <div class="row" style="margin-top: 300px">
+                    <b>Оценено фильмов: {{ profile.films_rated }}</b>
+                </div>
+                <div class="row">
+                    <b>Средняя выставленная оценка: {{ profile.average_rating }}</b>
+                </div>
+            </div>
+        </div>
+    <hr style="margin-top: 50px">
+    </div>
+{% endblock %}

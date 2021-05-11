@@ -1,0 +1,48 @@
+{% extends 'template.html' %}
+{% load static %}
+{% block content %}
+    <div class="container">
+
+        <div class="row">
+            <div class="col">
+                <img src="/media/{{ film.poster }}"><br><br>
+            </div>
+            <div class="col">
+                <table class="table table-light">
+                  <tbody>
+                    <tr>
+                      <th scope="row">Наименование</th>
+                      <td>{{ film.name }}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Жанр</th>
+                      <td>{{ genre }}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Год выпуска:</th>
+                      <td>{{ film.year }}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Длительность</th>
+                      <td>{{ film.length }}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Продюссер</th>
+                      <td>{{ film.producer }}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Актеры</th>
+                      <td>{% for actor in actors %}{{ actor }}; {% endfor %}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Рейтинг</th>
+                      <td>{{ rating }} ({{ reviews_count }} оценок)</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <button style="margin-top: 25px" type="button" class="btn btn-primary" onclick='location.href="{% url 'rate' film.id %}";'>Оценить!</button>
+            </div>
+        </div>
+        </div>
+    </div>
+{% endblock %}

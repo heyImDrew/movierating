@@ -1,0 +1,21 @@
+{% extends 'template.html' %}
+{% load static %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h2>Изменение личной информации</h2>
+                <hr style="margin-top: 25px; margin-bottom: 25px;">
+                <form action="#">
+                    <label>E-Mail: <input type="email" style="width: 500px" name="email" placeholder="Прошлое: {{ profile.email }}"></label><br>
+                    <label>Имя: <input type="text" style="width: 500px" name="name" placeholder="Прошлое: {{ account.name }}"></label><br>
+                    <label>Фамилия: <input type="text" style="width: 500px" name="surname" placeholder="Прошлое: {{ account.last_name }}"></label><br><br>
+                    <input type="submit" value="Подтвердить изменения">
+                </form>
+                <hr>
+                <a href="#">Чтобы изменить пароль нажмите сюда</a>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}

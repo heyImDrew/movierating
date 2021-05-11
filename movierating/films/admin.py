@@ -1,8 +1,8 @@
 from django.contrib import admin
 from films.models import (
     Film,
-    Series
+    Celebrity
 )
 
-admin.site.register(Series)
 admin.site.register(Film)
+admin.site.register(Celebrity)

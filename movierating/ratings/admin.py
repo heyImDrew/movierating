@@ -1,3 +1,5 @@
 from django.contrib import admin
+from ratings.models import Review, AverageRating
 
-# Register your models here.
+admin.site.register(Review)
+admin.site.register(AverageRating)

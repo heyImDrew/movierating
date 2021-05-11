@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Страница регистрации
+{% endblock %}
+{% block css %}
+    <link rel="stylesheet"  href="{%  static  'css/login_page.css'  %}">
+{% endblock %}
+{% block body %}
+    {% if error == "UAE" %}
+        <script>
+            alert("Пользователь с таким именем уже существует!")
+        </script>
+    {% endif %}
+    {% if error == "II" %}
+        <script>
+            alert("Некорректно введенные данные!")
+        </script>
+    {% endif %}
+    <div class="wrapper fadeInDown">
+  <div id="formContent">
+
+    <!-- Login Form -->
+    <form style="margin-top: 20px" action="{% url 'registration' %}" method="post">
+        {% csrf_token %}
+      <input type="text" id="login" class="fadeIn second" name="login" placeholder="Логин">
+      <input type="password" id="password" class="fadeIn third" name="password" placeholder="Пароль">
+      <input type="submit" class="fadeIn fourth" value="Зарегистрироваться!">
+    </form>
+
+    <!-- Remind Passowrd -->
+    <div id="formFooter">
+        <a class="underlineHover" href="{% url 'login' %}">Перейти на страницу логина!</a>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

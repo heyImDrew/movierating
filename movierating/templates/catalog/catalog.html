@@ -1,0 +1,25 @@
+{% extends 'template.html' %}
+{% load static %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+
+                {% for film_raw in films %}
+                    <hr>
+                    <div class="row" style="margin-bottom: 25px">
+                    {% for film in film_raw %}
+                        <div class="col-lg-4 col-md-4 col-4" style="text-align: center; font-size: 16px">
+                            {{ film.name }}
+                            <br>
+                            <a href="{% url 'film' film.id %}">
+                                <img src="/media/{{ film.poster }}" height="350px" width="250px">
+                            </a>
+                        </div>
+                    {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
