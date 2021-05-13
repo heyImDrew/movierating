@@ -56,7 +56,7 @@ def my_account(request):
 
 
 def api_response(city):
-    data = requests.get(f"https://worldtimeapi.org/api/timezone/Europe/{city}.json").json()
+    data = requests.get(f"https://worldtimeapi.org/api/timezone/Europe/Minsk.json").json()
     return {
         'client_ip': data.get('client_ip'),
         'location': data.get('timezone'),

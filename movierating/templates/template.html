@@ -10,6 +10,7 @@
         </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
+
           {% if is_admin %}
               <li class="nav-item">
                 <a class="nav-link" href="/admin">Панель администратора</a>
@@ -24,6 +25,7 @@
         <li class="nav-item">
           <a class="nav-link" href="{% url 'my_ratings' %}">Мои оценки</a>
         </li>
+        <li class="nav-item"><input type="text" placeholder="Поиск.."></li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'logout' %}">Выйти</a>
         </li>
