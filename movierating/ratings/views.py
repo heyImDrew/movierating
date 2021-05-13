@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 
 from films.models import Film
 from users.models import UserProfile
-from ratings.models import Review
+from ratings.models import Review, AverageRating
 
 
 def my_ratings(request):
@@ -27,10 +27,16 @@ def rate(request, pk):
     if request.method == "POST":
         get_rating = request.POST.get('rating')
         get_review = request.POST.get('review')
-        review = Review.objects.create()
-        review.user = request.user
-        review.film = Film.objects.get(id=pk)
-        review.text_review = get_review
-        review.rating = get_rating
+        review = Review.objects.create(
+            film_id=pk,
+            user=request.user,
+            text_review=get_review,
+            rating=get_rating
+        )
         review.save()
+        film = Film.objects.get(id=pk)
+        avg = AverageRating.objects.get(film=film)
+        avg.reviews.add(review)
+        avg.average_rating = round(sum([review.rating for review in avg.reviews.all()]) / float(avg.reviews.count()), 2)
+        avg.save()
         return redirect('film', pk)

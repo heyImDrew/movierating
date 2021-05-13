@@ -25,23 +25,6 @@ class UserProfile(models.Model):
         choices=StatusEnum.choices(),
         max_length=255,
     )
-    average_rating = models.FloatField(
-        default=0,
-        null=False,
-        blank=False,
-        validators=[
-            MinValueValidator(0),
-            MaxValueValidator(10),
-        ],
-    )
-    films_rated = models.IntegerField(
-        default=0,
-        null=False,
-        blank=False,
-        validators=[
-            MinValueValidator(0),
-        ]
-    )
 
 
 def user_created(sender, instance, created, **kwargs):

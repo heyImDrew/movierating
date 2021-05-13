@@ -22,8 +22,8 @@ from . import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('auth/', include('users.urls')),
-    path('ratings/', include('ratings.urls')),
+    path('', include('users.urls')),
+    path('', include('ratings.urls')),
     path('', include('films.urls')),
 ]
 

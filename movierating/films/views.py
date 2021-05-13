@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 
 from films.models import Film
 from enums.genre import GenreEnum
-from ratings.models import AverageRating
+from ratings.models import AverageRating, Review
 
 
 def catalog(request):
@@ -19,6 +19,7 @@ def catalog(request):
 def film(request, pk):
     if request.method == "GET":
         return render(request, 'catalog/film.html', {
+            'reviews': Review.objects.filter(film_id=pk),
             'rating': AverageRating.objects.get(film=Film.objects.get(id=pk)).average_rating,
             'reviews_count': AverageRating.objects.get(film=Film.objects.get(id=pk)).reviews.count(),
             'film': Film.objects.get(id=pk),

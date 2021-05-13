@@ -1,19 +1,28 @@
 {% extends 'template.html' %}
 {% load static %}
+{% block title %}
+    Мои рейтинги
+{% endblock %}
 {% block content %}
     <div class="container">
         <div class="row">
             <div class="col">
                 {% if ratings %}
                 <ul>
-                Оценки пользователя {{ account.username }}:
+                <hr>
+                <h2>Ваши оценки</h2>
+                <hr>
                 {% for rating in ratings %}
-                    <li><a href="#">{{ rating }}</a></li>
+                    <li>Выставлена оценка {{ rating.rating }} фильму '<a href="#">{{ rating.film.name }}</a>'</li>
                 {% endfor %}
+                <hr>
                 </ul>
+
                 {% else %}
                 Пользователь {{ account.username }} еще не выставлял оценки фильмам.
+                    <hr>
                 {% endif%}
+
             </div>
         </div>
     </div>

@@ -1,0 +1,36 @@
+{% extends 'template.html' %}
+{% load static %}
+{% block title %}
+    Изменить пароль
+{% endblock %}
+{% block content %}
+    {% if error == "PNM" %}
+        <script>
+            alert("Пароли не совпадают!")
+        </script>
+    {% endif %}
+    {% if message %}
+        <script>
+            alert("Пароль успешно изменен!")
+        </script>
+    {% endif %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <hr>
+                <h2>Изменение пароля</h2>
+                <hr>
+                Вы собираетесь изменить пароль.<br>Перепроверьте данные прежде чем подтвердить изменения.<br>
+                <form action="{% url 'change_password' %}" method="post" style="margin-bottom: 25px; margin-top: 25px">
+                    {% csrf_token %}
+                    <input type="password" name="password" placeholder="Новый пароль" autocomplete="off"><br>
+                    <input type="password" name="retype-password" placeholder="Повторите пароль" autocomplete="off">
+                    <br><br>
+                    <input type="submit" value="Подтвердить">
+                </form>
+                <hr>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}

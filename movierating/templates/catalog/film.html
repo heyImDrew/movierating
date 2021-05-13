@@ -1,11 +1,26 @@
 {% extends 'template.html' %}
 {% load static %}
+{% block title %}
+    Фильм "{{ film.name }}"
+{% endblock %}
 {% block content %}
     <div class="container">
 
         <div class="row">
             <div class="col">
-                <img src="/media/{{ film.poster }}"><br><br>
+                <img src="/media/{{ film.poster }}" style="margin-bottom: 50px"><br><br>
+                <b>Оценки:</b><br><br>
+                {% if reviews %}
+                    {% for review in reviews %}
+                    Пользователь <i>{{ review.user.username }}</i>: ({{ review.rating }})<br>
+                        {% if review.text_review %}
+                            - Комментарий: {{ review.text_review }}
+                        {% endif %}<br><br>
+                {% endfor %}
+                {% else %}
+                    На данный фильм никто не оставлял оценок :(
+                {% endif %}
+
             </div>
             <div class="col">
                 <table class="table table-light">
@@ -40,7 +55,7 @@
                     </tr>
                   </tbody>
                 </table>
-                <button style="margin-top: 25px" type="button" class="btn btn-primary" onclick='location.href="{% url 'rate' film.id %}";'>Оценить!</button>
+                <button style="margin-top: 25px; margin-bottom: 50px" type="button" class="btn btn-primary" onclick='location.href="{% url 'rate' film.id %}";'>Оценить!</button>
             </div>
         </div>
         </div>

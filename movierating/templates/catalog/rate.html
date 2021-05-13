@@ -1,15 +1,29 @@
 {% extends 'template.html' %}
 {% load static %}
+{% block title %}
+    Оценить "{{ film.name }}"
+{% endblock %}
 {% block content %}
     <div class="container">
         <div class="row">
             <div class="col">
-                Rate film  <a href="{% url 'film' film.id %}">'{{ film.name }}'</a>
-                <form action="{% url 'rate' film.id %}">
-                    <input type="number" name="rating">
-                    <input type="text" name="review">
-                    <input type="submit">
+                {% if profile.account_status == "ENABLED" %}
+                    <hr>
+                    <h3>Оцените фильм  <a href="{% url 'film' film.id %}">'{{ film.name }}'</a></h3>
+                    <hr>
+                    <form action="{% url 'rate' film.id %}" style="margin-top: 25px;" method="POST">
+                    {% csrf_token %}
+                    <input type="number" name="rating" placeholder="Поставьте оценку" min="0" max="10" style="width: 400px"><br>
+                    <input type="text" name="review" placeholder="Оставьте ревью" style="width: 400px; height: 200px"><br><br>
+                    <input type="submit" value="Оценить!">
                 </form>
+                    <hr>
+                {% else %}
+                    <script>
+                        alert("Ошибка доступа (причина: ограниченный аккаунт)");
+                    </script>
+                    <a href="{% url 'catalog' %}">Вернуться в каталог.</a>
+                {% endif %}
             </div>
         </div>
     </div>
